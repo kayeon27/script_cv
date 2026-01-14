@@ -46,12 +46,13 @@ def generate_cv(data: CVData):
         "hobbies": data.hobbies
     }
 
-    output_dir = "output"
-    os.makedirs(output_dir, exist_ok=True)
+    os.makedirs("/tmp/output", exist_ok=True)
     filename = f"{uuid.uuid4()}_cv.docx"
-    filepath = os.path.join(output_dir, filename)
+    filepath = f"/tmp/output/{filename}"
 
     doc.render(context)
     doc.save(filepath)
 
-    return FileResponse(filepath, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document", filename=filename)
+    return FileResponse(filepath, 
+                        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
+                        filename=filename)
